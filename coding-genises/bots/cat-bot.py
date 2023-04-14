@@ -1,6 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
+from discord.ext import commands
 
 load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -8,18 +9,19 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = discord.Client(intents=intents)
+bot = discord.bot(intents=intents)
+bot = commands.Bot(command_prefix="!")
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {bot.user}')
 
-@client.event
+@bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
 
-client.run(BOT_TOKEN)
+bot.run(BOT_TOKEN)
