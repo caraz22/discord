@@ -32,8 +32,8 @@ async def on_message(message):
 
     ratio = 0
 
-    if (("cat" in message.content) or ("kitty" in message.content) and ("tenor.com" in message.content)):
-        cat_gifs =+ 1
+    if ((("cat" in message.content) or ("kitty" in message.content)) and ("tenor.com" in message.content)):
+        cat_gifs += 1
     
     if message.content == "!count":
         await message.channel.send("ᨐᵉᵒʷ! The total number of messages is " + str(total_messages))
