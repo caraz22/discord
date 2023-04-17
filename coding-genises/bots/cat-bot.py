@@ -12,17 +12,19 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+global total_messages
+total_messages = 0
+
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-    global total_messages
-    total_messages = 0
 
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
     
+    global total_messages
     total_messages += 1
 
     if message.content.startswith('!count'):
@@ -30,7 +32,11 @@ async def on_message(message):
 
 @bot.command()
 async def count(ctx):
+    global total_messages
     if ctx.content.includes('count'):
-        await ctx.channel.send(total_messages)
+        meow = "ᨐᵉᵒʷ! The total number of messages is "
+        toString = str(total_messages)
+        meowToString = meow + toString
+        await ctx.channel.send(meowToString)
 
 bot.run(BOT_TOKEN)
