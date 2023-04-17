@@ -15,7 +15,7 @@ bot = discord.Client(intents=intents)
 global total_messages
 total_messages = 0
 global cat_gifs
-cat_gifs = -1
+cat_gifs = 0
 
 @bot.event
 async def on_ready():
@@ -33,7 +33,7 @@ async def on_message(message):
     ratio = 0
 
     if (("cat" in message.content) or ("kitty" in message.content) and ("tenor.com" in message.content)):
-        cat_gifs += 1
+        cat_gifs =+ 1
     
     if message.content == "!count":
         await message.channel.send("ᨐᵉᵒʷ! The total number of messages is " + str(total_messages))
