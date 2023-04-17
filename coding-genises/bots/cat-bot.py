@@ -30,16 +30,19 @@ async def on_message(message):
     total_messages += 1
     global cat_gifs
 
-    ratio = 0
-
     if ((("cat" in message.content) or ("kitty" in message.content)) and ("tenor.com" in message.content)):
         cat_gifs += 1
+
+    percentage = (cat_gifs / total_messages)
     
     if message.content == "!count":
         await message.channel.send("ᨐᵉᵒʷ! The total number of messages is " + str(total_messages))
+        total_messages - 1
     if message.content == "!cats":
         await message.channel.send("ᨐᵉᵒʷ! The total number of cat gifs is " + str(cat_gifs))
+        total_messages - 1
     if message.content == "!compare":
-        await message.channel.send("ᨐᵉᵒʷ! The ratio of cat gifs to all messages is " + str(ratio))
+        await message.channel.send("ᨐᵉᵒʷ! The percentage of cat gifs to all messages is " + str(percentage) + "%")
+        total_messages - 1
 
 bot.run(BOT_TOKEN)
