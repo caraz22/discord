@@ -1,10 +1,10 @@
 import discord
 import os
 from dotenv import load_dotenv
-from discord.ext import commands
 
 load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+global CHANNEL_ID
 CHANNEL_ID = os.environ.get("CHANNEL_ID")
 
 intents = discord.Intents.default()
@@ -16,6 +16,7 @@ global total_messages
 total_messages = 0
 global cat_gifs
 cat_gifs = 0
+global percentage
 
 @bot.event
 async def on_ready():
@@ -33,16 +34,20 @@ async def on_message(message):
     if ((("cat" in message.content) or ("kitty" in message.content)) and ("tenor.com" in message.content)):
         cat_gifs += 1
 
-    percentage = (cat_gifs / total_messages)
+    global percentage
     
     if message.content == "!count":
+        total_messages -= 1        
         await message.channel.send("ᨐᵉᵒʷ! The total number of messages is " + str(total_messages))
-        total_messages - 1
     if message.content == "!cats":
+        total_messages -= 1        
         await message.channel.send("ᨐᵉᵒʷ! The total number of cat gifs is " + str(cat_gifs))
-        total_messages - 1
     if message.content == "!compare":
+        total_messages -= 1
+        if total_messages == 0:
+            percentage = 0
+        else:
+            percentage = (cat_gifs / total_messages) * 100
         await message.channel.send("ᨐᵉᵒʷ! The percentage of cat gifs to all messages is " + str(percentage) + "%")
-        total_messages - 1
 
 bot.run(BOT_TOKEN)
