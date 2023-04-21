@@ -1,6 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
+import datetime
 
 load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -21,6 +22,8 @@ global percentage
 @bot.event
 async def on_ready():
     print(f"We have logged in as {bot.user}")
+    await bot.change_presence(activity=discord.Game(name="it ain't much, but it's honest work"))
+    # await bot.change_presence(activity=discord.Activity(name="it ain't much, but it's honest work"))
 
 @bot.event
 async def on_message(message):
